@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, talhelper, ... }:
 
 {
   # TODO please change the username & home direcotry to your own
@@ -34,6 +34,10 @@
       df = "df -h";
       du = "du -h";
     };
+    shellInit = ''
+      /etc/profiles/per-user/jahanson/bin/rtx hook-env | source
+      /etc/profiles/per-user/jahanson/bin/rtx activate fish | source
+    '';
     functions = {
       fish_greeting = {
         description = "Set the fish greeting";
@@ -73,6 +77,11 @@
     nmap # A utility for network discovery and security auditing
     ipcalc  # it is a calculator for the IPv4/v6 addresses
 
+    # kubernetes
+    k9s
+    kubectl
+    krew
+
     # misc
     cowsay
     file
@@ -109,6 +118,7 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    rtx # rtx package manager
   ];
 
   # starship - an customizable prompt for any shell
