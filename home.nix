@@ -70,6 +70,7 @@
     age # sops-age encryption
     sops 
     direnv # shell environment management
+    pre-commit # Pre-commit tasks for git
 
     # networking tools
     mtr # A network diagnostic tool
