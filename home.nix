@@ -35,8 +35,9 @@
       du = "du -h";
     };
     shellInit = ''
-      /etc/profiles/per-user/jahanson/bin/rtx hook-env | source
-      /etc/profiles/per-user/jahanson/bin/rtx activate fish | source
+      rtx hook-env | source
+      rtx activate fish | source
+      direnv hook fish | source
     '';
     functions = {
       fish_greeting = {
@@ -67,6 +68,7 @@
     yq-go # yaml processer https://github.com/mikefarah/yq
     fzf # A command-line fuzzy finder
     age # sops-age encryption
+    sops 
     direnv # shell environment management
 
     # networking tools
