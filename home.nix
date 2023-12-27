@@ -66,6 +66,8 @@
     jq # A lightweight and flexible command-line JSON processor
     yq-go # yaml processer https://github.com/mikefarah/yq
     fzf # A command-line fuzzy finder
+    age # sops-age encryption
+    direnv # shell environment management
 
     # networking tools
     mtr # A network diagnostic tool
@@ -81,6 +83,7 @@
     k9s
     kubectl
     krew
+    fluxcd
 
     # misc
     cowsay
