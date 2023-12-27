@@ -117,7 +117,9 @@
     vim
     lazygit
     fira-code-nerdfont
+    tailscale
   ];
+  services.tailscale.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
