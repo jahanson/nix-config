@@ -71,6 +71,7 @@
     sops 
     direnv # shell environment management
     pre-commit # Pre-commit tasks for git
+    minio-client # S3 management
 
     # networking tools
     mtr # A network diagnostic tool
