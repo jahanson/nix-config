@@ -72,6 +72,7 @@
     direnv # shell environment management
     pre-commit # Pre-commit tasks for git
     minio-client # S3 management
+    shellcheck
 
     # networking tools
     mtr # A network diagnostic tool
@@ -88,6 +89,8 @@
     kubectl
     krew
     fluxcd
+    kubernetes-helm
+    cilium-cli
 
     # misc
     cowsay
