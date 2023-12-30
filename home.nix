@@ -38,6 +38,7 @@
       rtx hook-env | source
       rtx activate fish | source
       direnv hook fish | source
+      set -gx PATH $PATH $HOME/.krew/bin
     '';
     functions = {
       fish_greeting = {
@@ -91,6 +92,7 @@
     fluxcd
     kubernetes-helm
     cilium-cli
+    hubble
 
     # misc
     cowsay
