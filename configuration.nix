@@ -118,6 +118,7 @@
     lazygit
     fira-code-nerdfont
     tailscale
+    appimage-run
   ];
   services.tailscale.enable = true;
 
@@ -147,6 +148,16 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
+
+  # Register app image as an executable and run it with appimage-run
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+    magicOrExtension = ''\x7fELF....AI\x02'';
+  };
 
   systemd.user.services.ssh_agent = {
     enable = true;
