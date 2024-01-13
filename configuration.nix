@@ -119,6 +119,9 @@
     fira-code-nerdfont
     tailscale
     appimage-run
+    python3
+    ansible
+    gparted
   ];
   services.tailscale.enable = true;
 

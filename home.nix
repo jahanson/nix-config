@@ -56,6 +56,7 @@
     neofetch
     nnn # terminal file manager
     ranger
+    go-task
 
     # archives
     zip
