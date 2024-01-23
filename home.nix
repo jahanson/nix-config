@@ -34,9 +34,9 @@
       df = "df -h";
       du = "du -h";
     };
+      # rtx hook-env | source
+      # rtx activate fish | source
     shellInit = ''
-      rtx hook-env | source
-      rtx activate fish | source
       direnv hook fish | source
       set -gx PATH $PATH $HOME/.krew/bin
     '';

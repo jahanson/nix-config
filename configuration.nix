@@ -122,6 +122,7 @@
     python3
     ansible
     gparted
+    lens
   ];
   services.tailscale.enable = true;
 
