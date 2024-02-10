@@ -11,8 +11,22 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd = {
+      supportedFilesystems = [ "nfs" ];
+      kernelModules = [ "nfs" ];
+    };
+  };
+
+  # fileSystems."/mnt/xen-backups" = {
+  #   device = "10.1.1.13:/eru/xen-backups";
+  #   fsType = "nfs";
+  # };
+
 
   programs.fish.enable = true;
 
@@ -95,11 +109,11 @@
     packages = with pkgs; [
       firefox
       thunderbird
-      git
       vscode
       vivaldi
       vivaldi-ffmpeg-codecs
       termius
+      talhelper.packages."${pkgs.system}".default
     ];
   };
   environment.variables.EDITOR = "vim";
@@ -111,7 +125,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    talhelper.packages."${pkgs.system}".default
+    git
     wget
     curl
     vim
@@ -123,6 +137,7 @@
     ansible
     gparted
     lens
+    nfs-utils
   ];
   services.tailscale.enable = true;
 
