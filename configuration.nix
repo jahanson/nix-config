@@ -22,11 +22,11 @@
     };
   };
 
-  # fileSystems."/mnt/xen-backups" = {
-  #   device = "10.1.1.13:/eru/xen-backups";
-  #   fsType = "nfs";
-  # };
-
+  fileSystems."/mnt/borg" = {
+    device = "10.1.1.13:/eru/borg";
+    fsType = "nfs";
+    options = [ "x-systemd.automount" "noauto" ];
+  };
 
   programs.fish.enable = true;
 
@@ -136,7 +136,7 @@
     python3
     ansible
     gparted
-    lens
+    openlens
     nfs-utils
   ];
   services.tailscale.enable = true;
