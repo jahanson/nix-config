@@ -30,6 +30,7 @@
           # old configuration file can still take effect.
           # Note: configuration.nix itself is also a Nixpkgs Module,
           ./nixos/durincore/configuration.nix
+          ./nixos/common.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -43,6 +44,7 @@
         specialArgs = inputs;
         modules = [
           ./nixos/este/configuration.nix
+          ./nixos/common.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -56,6 +58,7 @@
         specialArgs = inputs;
         modules = [
           ./nixos/gandalf/configuration.nix
+          ./nixos/common.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
