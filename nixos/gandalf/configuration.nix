@@ -33,6 +33,7 @@
   
   environment.systemPackages = with pkgs; [
     podman-compose
+    lazydocker
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -101,13 +102,17 @@
   };
 
   # TODO: Add xen-orchestra
-  # virtualisation.oci-containers = {
-  #   xen-orchestra = {
-  #     image = "xen-orchestra";
-  #     ports = [ "80:80" ];
-  #     volumes = [ "/eru/xen-backups:/backups" ];
-  #   };
-  # };
+  virtualisation.oci-containers = {
+    backend = "podman";
+    xen-orchestra = {
+      image = "docker.io/ronivay/xen-orchestra:5.136.0";
+      ports = [ "80:80" ];
+      volumes = [ "xen-backups:/backups" ];
+      environment = {
+        HTTP_PORT = "80";
+      };
+    };
+  };
   
   # ZFS automated snapshots
   services.sanoid = {

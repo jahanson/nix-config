@@ -31,6 +31,9 @@
       lt = "lsd --tree";
       lla = "lsd -la";
 
+      # lazydocker --> lazypodman
+      lazypodman="sudo DOCKER_HOST=unix:///run/podman/podman.sock lazydocker"
+
       # other
       df = "df -h";
       du = "du -h";
