@@ -16,6 +16,28 @@
     userEmail = "joe@veri.dev";
   };
 
+  # starship - an customizable prompt for any shell
+  programs.starship = {
+    enable = true;
+    # custom settings
+    settings = {
+      add_newline = false;
+      aws.disabled = true;
+      gcloud.disabled = true;
+      line_break.disabled = true;
+      username = {
+        disabled = false;
+        show_always = true;
+        format = "[$user]($style)@";
+      };
+      hostname ={ 
+        disabled = false;
+        ssh_only = false;
+        format = "[$hostname]($style) ";
+        ssh_symbol = "";
+      };
+    };
+  };
 
   # exa replacement, ls replacement.
   programs.lsd.enable = true;
