@@ -1,5 +1,5 @@
 {
-  description = "laptop NixOS Flake";
+  description = "NixOS Homelab";
 
   # This is the standard format for flake.nix.
   # `inputs` are the dependencies of the flake,
@@ -29,12 +29,41 @@
           # Import the configuration.nix here, so that the
           # old configuration file can still take effect.
           # Note: configuration.nix itself is also a Nixpkgs Module,
-          ./nixos/configuration.nix
+          ./nixos/durincore/configuration.nix
+          ./nixos/common.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.jahanson = import ./home-manager/home.nix;
+            home-manager.users.jahanson = import ./home-manager/durincore.nix;
+          }
+        ];
+      };
+      "este" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./nixos/este/configuration.nix
+          ./nixos/common.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jahanson = import ./home-manager/este.nix;
+          }
+        ];
+      };
+      "gandalf" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = inputs;
+        modules = [
+          ./nixos/gandalf/configuration.nix
+          ./nixos/common.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jahanson = import ./home-manager/gandalf.nix;
           }
         ];
       };
