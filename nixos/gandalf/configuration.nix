@@ -113,7 +113,6 @@
           "/eru/containers/volumes/xo-redis-data:/var/lib/redis"
           "/eru/xen-backups:/backups"
         ];
-        user = "548:548";
         environment = {
           HTTP_PORT = "80";
         };
