@@ -171,6 +171,10 @@
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
+      window.dimensions = {
+        columns = 120;
+        lines = 30;
+      };
     };
   };
 
