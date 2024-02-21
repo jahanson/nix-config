@@ -109,8 +109,8 @@
         image = "docker.io/ronivay/xen-orchestra:5.136.0";
         ports = [ "80:80" ];
         volumes = [ 
-          "xen-orchestra_xo-data:/var/lib/xo-server"
-          "xen-orchestra_redis-data:/var/lib/redis"
+          "/eru/containers/volumes/xo-data:/var/lib/xo-server"
+          "/eru/containers/volumes/xo-redis-data:/var/lib/redis"
           "/eru/xen-backups:/backups"
         ];
         user = "548:548";
