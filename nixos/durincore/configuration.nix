@@ -10,50 +10,10 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-    initrd = {
-      supportedFilesystems = [ "nfs" ];
-      kernelModules = [ "nfs" ];
-    };
-  };
-
-  fileSystems."/mnt/borg" = {
-    device = "10.1.1.13:/eru/borg";
-    fsType = "nfs";
-    options = [ "x-systemd.automount" "noauto" ];
-  };
-
-  programs.fish.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  networking.hostName = "durincore"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  # Network settings
+  networking = {
+    hostName = "durincore"; # Define your hostname.
+    networkmanager.enable = true;
   };
 
   # Enable the X11 windowing system.
@@ -95,46 +55,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with 'passwd'.
-  users.users.jahanson = {
-    isNormalUser = true;
-    description = "Joseph Hanson";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.fish;
-    packages = with pkgs; [
-      firefox
-      thunderbird
-      vscode
-      vivaldi
-      vivaldi-ffmpeg-codecs
-      termius
-    ];
-  };
-  environment.variables.EDITOR = "vim";
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-    wget
-    curl
-    vim
-    lazygit
-    fira-code-nerdfont
-    tailscale
-    appimage-run
-    python3
-    ansible
-    gparted
-    openlens
-    nfs-utils
-  ];
-  services.tailscale.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

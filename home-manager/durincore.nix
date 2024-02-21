@@ -115,7 +115,7 @@
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
-    nixd
+    nixd # nix lsp server
 
     # productivity
     hugo # static site generator
@@ -137,6 +137,18 @@
     pciutils # lspci
     usbutils # lsusb
     rtx # rtx package manager
+
+    # Browsers
+    firefox
+    vivaldi
+    vivaldi-ffmpeg-codecs
+
+    # Email
+    thunderbird
+
+    # Dev
+    vscode
+    termius
   ];
 
   # starship - an customizable prompt for any shell
