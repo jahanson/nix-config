@@ -53,10 +53,11 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    neofetch
-    nnn # terminal file manager
+    # terminal file managers
+    nnn 
     ranger
-    go-task
+    yazi
+
 
     # archives
     zip
@@ -65,6 +66,7 @@
     p7zip
 
     # utils
+    go-task
     ripgrep # recursively searches directories for a regex pattern
     jq # A lightweight and flexible command-line JSON processor
     yq-go # yaml processer https://github.com/mikefarah/yq
@@ -79,7 +81,6 @@
     kustomize
 
     # networking tools
-    mtr # A network diagnostic tool
     iperf3
     dnsutils # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
@@ -98,6 +99,7 @@
     hubble
 
     # misc
+    neofetch
     cowsay
     file
     which
