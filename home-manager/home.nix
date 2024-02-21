@@ -146,9 +146,15 @@
       aws.disabled = true;
       gcloud.disabled = true;
       line_break.disabled = true;
+      username = {
+        disabled = false;
+        show_always = true;
+        format = "[$user]($style)@";
+      };
       hostname ={ 
         disabled = false;
         ssh_only = false;
+        format = "[$ssh_symbol$hostname]($style) > ";
       };
     };
   };
