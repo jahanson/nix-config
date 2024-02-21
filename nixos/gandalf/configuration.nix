@@ -104,12 +104,14 @@
   # TODO: Add xen-orchestra
   virtualisation.oci-containers = {
     backend = "podman";
-    xen-orchestra = {
-      image = "docker.io/ronivay/xen-orchestra:5.136.0";
-      ports = [ "80:80" ];
-      volumes = [ "xen-backups:/backups" ];
-      environment = {
-        HTTP_PORT = "80";
+    containers ={
+      xen-orchestra = {
+        image = "docker.io/ronivay/xen-orchestra:5.136.0";
+        ports = [ "80:80" ];
+        volumes = [ "xen-backups:/backups" ];
+        environment = {
+          HTTP_PORT = "80";
+        };
       };
     };
   };
