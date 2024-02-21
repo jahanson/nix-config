@@ -1,5 +1,5 @@
 {
-  description = "jahanson's NixOS Flake";
+  description = "laptop NixOS Flake";
 
   # This is the standard format for flake.nix.
   # `inputs` are the dependencies of the flake,
@@ -11,10 +11,10 @@
     # The most widely used is `github:owner/name/reference`,
     # which represents the GitHub repository URL + branch/commit-id/tag.
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    talhelper.url = "github:budimanjojo/talhelper/v1.16.4";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -29,12 +29,12 @@
           # Import the configuration.nix here, so that the
           # old configuration file can still take effect.
           # Note: configuration.nix itself is also a Nixpkgs Module,
-          ./configuration.nix
+          ./nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.jahanson = import ./home.nix;
+            home-manager.users.jahanson = import ./home-manager/home.nix;
           }
         ];
       };
