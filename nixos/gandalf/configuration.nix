@@ -108,10 +108,21 @@
       xen-orchestra = {
         image = "docker.io/ronivay/xen-orchestra:5.136.0";
         ports = [ "80:80" ];
-        volumes = [ "xen-backups:/backups" ];
+        volumes = [ 
+          "xen-orchestra_xo-data:/var/lib/xo-server"
+          "xen-orchestra_redis-data:/var/lib/redis"
+        ];
         environment = {
           HTTP_PORT = "80";
         };
+        extraOptions = [
+          "--device=/dev/fuse:/dev/fuse"
+          "--device=/dev/loop-control:/dev/loop-control"
+          "--device=/dev/loop0:/dev/loop0"
+          "--device=/dev/loop0:/dev/loop1"
+          "--device=/dev/loop0:/dev/loop2"
+          "--device=/dev/loop0:/dev/loop3"
+        ];
       };
     };
   };
