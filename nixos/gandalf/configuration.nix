@@ -111,7 +111,9 @@
         volumes = [ 
           "xen-orchestra_xo-data:/var/lib/xo-server"
           "xen-orchestra_redis-data:/var/lib/redis"
+          "/eru/xen-backups:/backups"
         ];
+        user = "548:548";
         environment = {
           HTTP_PORT = "80";
         };
