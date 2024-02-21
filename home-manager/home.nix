@@ -154,7 +154,8 @@
       hostname ={ 
         disabled = false;
         ssh_only = false;
-        format = "[$ssh_symbol$hostname]($style) ";
+        format = "[$hostname]($style) ";
+        ssh_symbol = "";
       };
     };
   };
