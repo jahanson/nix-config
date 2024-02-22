@@ -92,6 +92,7 @@
     # kubernetes
     k9s
     kubectl
+    kubelogin-oidc # omni login for k8s
     krew
     fluxcd
     kubernetes-helm
