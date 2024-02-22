@@ -32,6 +32,16 @@
     settings.KbdInteractiveAuthentication = false;
   };
 
+  services.hydra = {
+    enable = true;
+    hydraURL = "http://10.1.1.56:3000"; # externally visible URL
+    notificationSender = "hydra@localhost"; # e-mail of hydra service
+    # a standalone hydra will require you to unset the buildMachinesFiles list to avoid using a nonexistant /etc/nix/machines
+    buildMachinesFiles = [];
+    # you will probably also want, otherwise *everything* will be built from scratch
+    useSubstitutes = true;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
