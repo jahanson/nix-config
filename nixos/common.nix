@@ -31,6 +31,7 @@
     "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPHFQ3hDjjrKsecn3jmSWYlRXy4IJCrepgU1HaIV5VcmB3mUFmIZ/pCZnPmIG/Gbuqf1PP2FQDmHMX5t0hTYG9A="
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIETR70eQJiXaJuB+qpI1z+jFOPbEZoQNRcq4VXkojWfU"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAanHn3AWxWfHv51wgDmJwhQrJgsGd+LomJJZ5kXFTP3 jahanson@durincore"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATyScd8ZRhV7uZmrQNSAbRTs9N/Dbx+Y8tGEDny30sA jahanson@Anduril"
   ];
 
   # Set up users
@@ -45,9 +46,10 @@
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPHFQ3hDjjrKsecn3jmSWYlRXy4IJCrepgU1HaIV5VcmB3mUFmIZ/pCZnPmIG/Gbuqf1PP2FQDmHMX5t0hTYG9A="
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIETR70eQJiXaJuB+qpI1z+jFOPbEZoQNRcq4VXkojWfU"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAanHn3AWxWfHv51wgDmJwhQrJgsGd+LomJJZ5kXFTP3 jahanson@durincore"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATyScd8ZRhV7uZmrQNSAbRTs9N/Dbx+Y8tGEDny30sA jahanson@Anduril"
     ];
-  };
-  
+  }; 
+
   # Default editor
   environment.variables.EDITOR = "vim";
   # Time zone.
