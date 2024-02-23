@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 {
 
+  imports = [ ../cachix.nix ];
   # Bootloader.
   boot = {
     loader = {
@@ -20,6 +21,7 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [ "root" "jahanson" ];
 
   # Enable fish
   programs.fish.enable = true;
