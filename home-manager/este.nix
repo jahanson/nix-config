@@ -51,7 +51,7 @@
     functions = {
       fish_greeting = {
         description = "Set the fish greeting";
-        body = "neofetch";
+        body = "fastfetch";
       };
     };
   };
@@ -83,7 +83,7 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    neofetch
+    fastfetch
     go-task
     
     # terminal file managers

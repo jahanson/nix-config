@@ -43,7 +43,7 @@
     functions = {
       fish_greeting = {
         description = "Set the fish greeting";
-        body = "neofetch";
+        body = "fastfetch";
       };
     };
   };
@@ -100,7 +100,7 @@
     hubble
 
     # misc
-    neofetch
+    fastfetch
     cowsay
     file
     which
