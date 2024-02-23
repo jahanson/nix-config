@@ -47,6 +47,7 @@
     ];
   in
   {
+    hosts = import ./hosts.nix;
     pkgs = forAllSystems (localSystem: import nixpkgs {
       inherit localSystem;
       config = {
