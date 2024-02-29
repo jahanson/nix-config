@@ -38,6 +38,7 @@
     # rtx activate fish | source
     shellInit = ''
       direnv hook fish | source
+      atuin init fish | source
       set -gx PATH $PATH $HOME/.krew/bin
     '';
     functions = {
