@@ -39,7 +39,25 @@
 
   # The `@` syntax here is used to alias the attribute set of the
   # inputs's parameter, making it convenient to use inside the function.
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+  in
+  {
+    hosts = import ./hosts.nix;
+    pkgs = forAllSystems (localSystem: import nixpkgs {
+      inherit localSystem;
+      config = {
+        allowUnfree = true;
+        allowAliases = true;
+      };
+    });
+
+    packages = forAllSystems (import ./packages inputs);
+
     nixosConfigurations = {
       "durincore" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -87,5 +105,6 @@
         ];
       };
     };
+
   };
 }
