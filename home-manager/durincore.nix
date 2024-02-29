@@ -98,6 +98,7 @@
     kubernetes-helm
     cilium-cli
     hubble
+    lens
 
     # misc
     fastfetch
@@ -110,6 +111,7 @@
     gawk
     zstd
     gnupg
+    fira-code-nerdfont
 
     # nix related
     #
@@ -150,6 +152,7 @@
     # Dev
     vscode
     termius
+    atuin
   ];
 
   # starship - an customizable prompt for any shell
