@@ -35,6 +35,12 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # atuin
+    atuin = {
+      url = "github:atuinsh/atuin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # The `@` syntax here is used to alias the attribute set of the
@@ -68,6 +74,7 @@
           # Note: configuration.nix itself is also a Nixpkgs Module,
           ./nixos/durincore/configuration.nix
           ./nixos/common.nix
+          # { nixpkgs.overlays = [ (self: super: { atuin = atuin.packages.${self.pkgs.system}.atuin; }) ]; }
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
