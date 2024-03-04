@@ -9,20 +9,12 @@
     homeDirectory = "/home/jahanson";
   };
 
-  imports = [
-    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
-  ];
-
-  services.vscode-server.enable = true;
-
-
-    # basic configuration of git, please change to your own
+  # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
     userName = "Joseph Hanson";
     userEmail = "joe@veri.dev";
   };
-
 
   # exa replacement, ls replacement.
   programs.lsd.enable = true;
