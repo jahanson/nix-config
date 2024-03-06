@@ -16,6 +16,12 @@
     enable = true;
     userName = "Joseph Hanson";
     userEmail = "joe@veri.dev";
+    extraConfig = {
+      user = { signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIDSAmssproxG+KsVn2DfuteBAemHrmmAFzCtldpKl4J"; };
+      gpg = { format = "ssh"; };
+      "gpg \"ssh\"" = { program = "/etc/profiles/per-user/jahanson/bin/op-ssh-sign"; };
+      commit = { gpgsign = true; };
+    };
   };
 
   # exa replacement, ls replacement.
@@ -80,6 +86,8 @@
     shellcheck
     envsubst
     kustomize
+    _1password-gui
+    _1password
 
     # networking tools
     iperf3
