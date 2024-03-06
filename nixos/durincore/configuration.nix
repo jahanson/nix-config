@@ -16,22 +16,27 @@
     networkmanager.enable = true;
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.jahanson.enableGnomeKeyring = true;
-  programs.seahorse.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  programs.hyprland.enable = true;
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
   };
+
+  # # Enable the X11 windowing system.
+  # services.xserver.enable = true;
+
+  # # Enable the GNOME Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  
+  # services.gnome.gnome-keyring.enable = true;
+  # security.pam.services.jahanson.enableGnomeKeyring = true;
+  # programs.seahorse.enable = true;
+
+  # # Configure keymap in X11
+  # services.xserver = {
+  #   layout = "us";
+  #   xkbVariant = "";
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -52,9 +57,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
