@@ -1,15 +1,18 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  # TODO please change the username & home direcotry to your own
+  imports = [ inputs.hyprland-git.homeManagerModules.default ];
+  
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = true;
+    plugins = [ inputs.hy3.packages.${pkgs.system}.hy3 ];
+  };
+
+
+  # please change the username & home direcotry to your own
   home.username = "jahanson";
   home.homeDirectory = "/home/jahanson";
-
-  # set cursor size and dpi for 4k monitor
-  xresources.properties = {
-    "Xcursor.size" = 16;
-    "Xft.dpi" = 172;
-  };
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -214,7 +217,7 @@
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.05";
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;

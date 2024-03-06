@@ -11,44 +11,78 @@
     # The most widely used is `github:owner/name/reference`,
     # which represents the GitHub repository URL + branch/commit-id/tag.
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     # Home Manager
-    home-manager = {
+    home-manager-stable = {
       url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # nix-fast-build
     nix-fast-build = {
       url = "github:Mic92/nix-fast-build";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
      # sops-nix
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
      # deploy-rs
     deploy-rs = {
       url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     # atuin
     atuin = {
       url = "github:atuinsh/atuin";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
+    };
+
+    # hyprland official
+    hyprland-git = {
+      url = "github:hyprwm/hyprland/v0.36.0";
+    };
+    
+    # hyprland plugin for an i3 / sway like manual tiling layout
+    hy3 = {
+      url = "github:outfoxxed/hy3/hl0.36.0";
+    };
+    
+    # hyprland-xdg-portal
+    hyprland-xdph-git = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    };
+    
+    # hyprland-protocols
+    hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+
+    # hyprland-community nix
+    hyprland-nix = {
+      url = "github:hyprland-community/hyprland-nix";
+      inputs = {
+        hyprland-xdph.follows = "hyprland-xdph-git";
+        hyprland-protocols.follows = "hyprland-protocols-git";
+      };
     };
   };
 
   # The `@` syntax here is used to alias the attribute set of the
   # inputs's parameter, making it convenient to use inside the function.
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, hy3, ... }@inputs:
   let
     inherit (self) outputs;
-    forAllSystems = nixpkgs.lib.genAttrs [
+    forAllSystems = nixpkgs-stable.lib.genAttrs [
       # "aarch64-linux"
       "x86_64-linux"
     ];
@@ -56,7 +90,7 @@
   {
     
     nixosConfigurations = {
-      "durincore" = nixpkgs.lib.nixosSystem {
+      "durincore" = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
@@ -66,21 +100,22 @@
           ./nixos/durincore/configuration.nix
           ./nixos/common.nix
           # { nixpkgs.overlays = [ (self: super: { atuin = atuin.packages.${self.pkgs.system}.atuin; }) ]; }
-          home-manager.nixosModules.home-manager
+          home-manager-unstable.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.jahanson = import ./home-manager/durincore.nix;
+            home-manager.extraSpecialArgs = {inherit inputs outputs;};
           }
         ];
       };
-      "este" = nixpkgs.lib.nixosSystem {
+      "este" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/este/configuration.nix
           ./nixos/common.nix
-          home-manager.nixosModules.home-manager
+          home-manager-stable.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -88,13 +123,13 @@
           }
         ];
       };
-      "gandalf" = nixpkgs.lib.nixosSystem {
+      "gandalf" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/gandalf/configuration.nix
           ./nixos/common.nix
-          home-manager.nixosModules.home-manager
+          home-manager-stable.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

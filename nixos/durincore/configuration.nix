@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs,  ... }:
+{ config, pkgs, inputs,  ... }:
 
 {
   imports =
@@ -16,7 +16,11 @@
     networkmanager.enable = true;
   };
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland-git.packages.${pkgs.system}.hyprland;
+  };
+
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
