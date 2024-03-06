@@ -86,6 +86,8 @@
     ansible
     smartmontools
     nfs-utils
+    borgbackup
+    borgmatic
   ];
 
   programs.mtr.enable = true;
