@@ -101,7 +101,7 @@
 
   };
 
-  # TODO: Add xen-orchestra
+  # Xen-orchestra
   virtualisation.oci-containers = {
     backend = "podman";
     containers ={
