@@ -65,7 +65,7 @@
     };
     
     # hyprland-protocols
-    hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    hyprland-protocols-git.url = "github:hyprwm/hyprland-protocols";
 
     # hyprland-community nix
     hyprland-nix = {

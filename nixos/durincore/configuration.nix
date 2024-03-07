@@ -15,10 +15,11 @@
     hostName = "durincore"; # Define your hostname.
     networkmanager.enable = true;
   };
-
+  
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland-git.packages.${pkgs.system}.hyprland;
+    portalPackage = inputs.hyprland-xdph-git.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
 
   environment.sessionVariables = {
