@@ -131,6 +131,12 @@
         };
       };
       windowrulev2 = "suppressevent maximize, class:.*"; # You'll probably like this.
+      exec-once = 
+        [
+          "waybar"
+          "dunst"
+          "1password --silent"
+        ];
     };
   };
 
@@ -172,8 +178,10 @@
     # rtx activate fish | source
     shellInit = ''
       direnv hook fish | source
-      atuin init fish | source
       set -gx PATH $PATH $HOME/.krew/bin
+    '';
+    interactiveShellInit = ''
+      atuin init fish | source
     '';
     functions = {
       fish_greeting = {
@@ -193,11 +201,11 @@
     ranger
     yazi
 
-    # gui file managers
-    xfce.thunar
-
-    # Run Menu
-    wofi
+    # Hyprland must haves
+    xfce.thunar # gui file manager
+    wofi # Run Menu
+    waybar # Wayland bar for Sway and Wlroots based compositors
+    dunst # A lightweight replacement for the notification-daemons provided by most desktop environments
 
     # archives
     zip
