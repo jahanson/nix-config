@@ -7,6 +7,21 @@
     enable = true;
     systemd.enable = true;
     plugins = [ inputs.hy3.packages.${pkgs.system}.hy3 ];
+    settings = {
+      "$mod" = "SUPER";
+      bind = 
+        [
+          "$mod, V, exec, vivaldi"
+          "$mod, W, exec, alacritty"
+        ];
+      "monitor" = "eDP-1,1920x1080@60,0x0,1";
+      "$terminal" = "alacritty";
+      input = {
+        touchpad = {
+          natural_scroll = "false";
+        };
+      };
+    };
   };
 
 
@@ -198,7 +213,6 @@
       env.TERM = "xterm-256color";
       font = {
         size = 12;
-        draw_bold_text_with_bright_colors = true;
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
