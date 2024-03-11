@@ -63,6 +63,11 @@
     hyprland-xdph-git = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
     };
+
+    # nixd language server
+    nixd-git = {
+      url = "github:nix-community/nixd";
+    };
   };
 
   # The `@` syntax here is used to alias the attribute set of the

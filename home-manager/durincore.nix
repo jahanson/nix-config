@@ -223,7 +223,8 @@
     # it provides the command `nom` works just like `nix`
     # with more details log output
     nix-output-monitor
-    nixd # nix lsp server
+    # nix
+    inputs.nixd-git.packages.${pkgs.system}.nixd # nix lsp server
 
     # productivity
     glow # markdown previewer in terminal
