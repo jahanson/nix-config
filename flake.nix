@@ -66,15 +66,6 @@
     
     # hyprland-protocols
     hyprland-protocols-git.url = "github:hyprwm/hyprland-protocols";
-
-    # hyprland-community nix
-    hyprland-nix = {
-      url = "github:hyprland-community/hyprland-nix";
-      inputs = {
-        hyprland-xdph.follows = "hyprland-xdph-git";
-        hyprland-protocols.follows = "hyprland-protocols-git";
-      };
-    };
   };
 
   # The `@` syntax here is used to alias the attribute set of the
