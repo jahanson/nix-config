@@ -200,11 +200,6 @@
     dunst # A lightweight replacement for the notification-daemons provided by most desktop environments
 
     # utils
-    direnv # shell environment management
-    pre-commit # Pre-commit tasks for git
-    minio-client # S3 management
-    shellcheck
-    envsubst
     kustomize
     _1password-gui
     _1password
