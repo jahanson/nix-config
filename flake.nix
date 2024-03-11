@@ -63,9 +63,6 @@
     hyprland-xdph-git = {
       url = "github:hyprwm/xdg-desktop-portal-hyprland";
     };
-    
-    # hyprland-protocols
-    hyprland-protocols-git.url = "github:hyprwm/hyprland-protocols";
   };
 
   # The `@` syntax here is used to alias the attribute set of the
