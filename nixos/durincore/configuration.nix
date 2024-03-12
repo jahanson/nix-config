@@ -46,6 +46,16 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable login prompt when booting.
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+      };
+    };
+  };
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
