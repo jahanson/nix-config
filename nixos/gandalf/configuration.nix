@@ -27,8 +27,9 @@
   # Network settings
   networking = {
     hostName = "gandalf"; # Define your hostname.
-    networkmanager.enable = true;
     hostId = "e2fc95cd";
+    networkmanager.enable = true;
+    firewall.enable = false;
   };
   
   environment.systemPackages = with pkgs; [
@@ -85,6 +86,16 @@
         "directory mask" = "0755";
         "force user" = "apps";
         "force group" = "apps";
+      };
+      hansonhive = {
+        path = "/eru/hansonhive";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "no";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "33";
+        "force group" = "33";
       };
     };
   };
@@ -147,7 +158,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
