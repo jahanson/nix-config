@@ -97,6 +97,28 @@
         "force user" = "www-data";
         "force group" = "www-data";
       };
+      tm_joe = {
+        path = "/eru/tm_joe";
+        "valid users" = "jahanson";
+        public = "no";
+        writeable = "yes";
+        "guest ok" = "no";
+        "force user" = "jahanson";
+        "fruit:aapl" = "yes";
+        "fruit:time machine" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
+      tm_elisia = {
+        path = "/eru/tm_elisia";
+        "valid users" = "emhanson";
+        public = "no";
+        writeable = "yes";
+        "guest ok" = "no";
+        "force user" = "emhanson";
+        "fruit:aapl" = "yes";
+        "fruit:time machine" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
     };
   };
 
