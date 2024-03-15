@@ -22,6 +22,9 @@
     portalPackage = inputs.hyprland-xdph-git.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
 
+  # VirtManager for gandalf QEMU/KVM
+  programs.virt-manager.enable = true;
+
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
