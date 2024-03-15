@@ -7,6 +7,13 @@
   home = {
     username = "jahanson";
     homeDirectory = "/home/jahanson";
+    stateVersion = "23.11";
+
+    packages = with pkgs; [
+      # it provides the command `nom` works just like `nix`
+      # with more details log output
+      nix-output-monitor
+    ];
   };
 
   # basic configuration of git, please change to your own
@@ -51,18 +58,5 @@
     };
   };
 
-    # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
-    # here is some command line tools I use frequently
-    # feel free to add your own or remove some of them
-
-    # nix related
-    #
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
-    nix-output-monitor
-  ];
-
-  home.stateVersion = "23.11";
   programs.home-manager.enable = true;
 }
