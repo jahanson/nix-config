@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.nixvirt-git.nixosModules.default
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -39,7 +40,6 @@
   environment.systemPackages = with pkgs; [
     podman-compose
     lazydocker
-    inputs.nixvirt-git.packages.${pkgs.system}.default
   ];
 
   # Services
