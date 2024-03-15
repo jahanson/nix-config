@@ -132,10 +132,11 @@
 
   };
 
-  # Xen-orchestra
+  # Podman Containers
   virtualisation.oci-containers = {
     backend = "podman";
     containers ={
+      # Xen-orchestra container
       xen-orchestra = {
         image = "docker.io/ronivay/xen-orchestra:5.136.0";
         ports = [ "80:80" ];
@@ -171,6 +172,17 @@
         daily =  7;
         monthly = 12;
       };
+    };
+  };
+
+  # Enable QEMU/KVM/libvirt
+  virtualisation.libvirt.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      ovmf.enable = true;
+      ovmf.packages = [pkgs.OVMFFull.fd];
     };
   };
 
