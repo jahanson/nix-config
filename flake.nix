@@ -25,21 +25,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # nix-fast-build
-    nix-fast-build = {
-      url = "github:Mic92/nix-fast-build";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
      # sops-nix
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
-    };
-
-     # deploy-rs
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
@@ -67,6 +55,11 @@
     # nixd language server
     nixd-git = {
       url = "github:nix-community/nixd";
+    };
+
+    # NixVirt for qemu & libvirt
+    nixvirt-git = {
+      url = "github:AshleyYakeley/NixVirt/v0.3.0";
     };
   };
 

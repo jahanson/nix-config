@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -39,6 +39,7 @@
   environment.systemPackages = with pkgs; [
     podman-compose
     lazydocker
+    inputs.nixvirt-git.packages.${pkgs.system}.default
   ];
 
   # Services
