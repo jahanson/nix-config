@@ -60,6 +60,7 @@
     # NixVirt for qemu & libvirt
     nixvirt-git = {
       url = "github:AshleyYakeley/NixVirt/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
   };
 
