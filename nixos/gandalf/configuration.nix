@@ -19,9 +19,13 @@
     zfs.extraPools = [ "eru" ];
   };
 
+  # ZFS NFS Share settings for read/write. Allows root passthrough with no user permission squash. Multiple IPs.
   # sudo zfs set sharenfs="rw=10.1.2.0/24:10.5.0.8/32,no_root_squash,sec=sys,anonuid=548,anongid=548" eru/xen-backups
+  # Read Only
   # sudo zfs set sharenfs="ro=10.1.2.0/24,no_root_squash,sec=sys,anonuid=548,anongid=548" eru/borg
+  # Read Only and Read Write
   # sudo zfs set sharenfs="ro=10.1.2.0/24,rw=10.1.1.55/32,no_root_squash,sec=sys,anonuid=548,anongid=548" eru/borg/nextcloud
+  # Disables NFS share for dataset.
   # sudo zfs set sharenfs inherit eru/xen-backups
 
   # Network settings
