@@ -15,6 +15,8 @@
       "$menu" = "wofi --show drun";
       bind = 
         [
+          # Disables middle mouse button paste.
+          ", mouse:274, exec, ;"
           # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
           # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
