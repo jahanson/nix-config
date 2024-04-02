@@ -3,7 +3,11 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, inputs, ... }:
-
+let
+  upsPassword = "illgettoiteventually";
+  vendorid = "0764";
+  productid = "0501";
+in
 {
   imports =
     [
@@ -31,10 +35,20 @@
 
   # Network settings
   networking = {
-    hostName = "gandalf"; # Define your hostname.
+    hostName = "gandalf"; 
     hostId = "e2fc95cd";
+    useDHCP = false; # needed for bridge
     networkmanager.enable = true;
     firewall.enable = false;
+    interfaces = {
+      "enp130s0f0".useDHCP = true;
+      "enp130s0f1".useDHCP = true;
+    };
+    bridges = {
+      "br0" = {
+        interfaces = [ "enp130s0f1" ];
+      };
+    };
   };
   
   environment.systemPackages = with pkgs; [
@@ -50,6 +64,94 @@
     # require public key authentication for better security
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
+  };
+  services.prometheus.exporters.zfs.enable = true;
+  services.prometheus.exporters.smartctl.enable = true;
+
+  # UPS & NUT
+  power.ups = {
+    enable = true;
+    ups.cyberpower = {
+      driver = "usbhid-ups";
+      port = "auto";
+      directives = [
+        "vendorid = ${vendorid}"
+        "productid = ${productid}"
+        "product = CP1500AVRLCDa"
+        "serial = CTHKY2013373"
+        "vendor = CPS"
+        "bus = 002"
+      ];
+    };
+  };
+  users = {
+    users.nut = {
+      isSystemUser = true;
+      group = "nut";
+      # it does not seem to do anything with this directory
+      # but something errored without it, so whatever
+      home = "/var/lib/nut";
+      createHome = true;
+    };
+    groups.nut = { };
+  };
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="${vendorid}", ATTRS{idProduct}=="${productid}", MODE="664", GROUP="nut", OWNER="nut"
+  '';
+
+  systemd.services.upsd.serviceConfig = {
+    User = "root";
+    Group = "nut";
+  };
+
+  systemd.services.upsdrv.serviceConfig = {
+    User = "root";
+    Group = "nut";
+  };
+
+  # reference: https://github.com/networkupstools/nut/tree/master/conf
+  environment.etc = {
+    # all this file needs to do is exist
+    upsdConf = {
+      text = "";
+      target = "nut/upsd.conf";
+      mode = "0440";
+      group = "nut";
+      user = "nut";
+    };
+    upsdUsers = {
+      # update upsmonConf MONITOR to match
+      text = ''
+      [upsmon]
+        password = ${upsPassword}
+        upsmon master
+      '';
+      target = "nut/upsd.users";
+      mode = "0440";
+      group = "nut";
+      user = "nut";
+    };
+    # RUN_AS_USER is not a default
+    # the rest are from the sample
+    # grep -v '#' /nix/store/8nciysgqi7kmbibd8v31jrdk93qdan3a-nut-2.7.4/etc/upsmon.conf.sample
+    upsmonConf = {
+      text = ''
+        RUN_AS_USER nut
+
+        MINSUPPLIES 1
+        SHUTDOWNCMD "shutdown -h 0"
+        POLLFREQ 5
+        POLLFREQALERT 5
+        HOSTSYNC 15
+        DEADTIME 15
+        RBWARNTIME 43200
+        NOCOMMWARNTIME 300
+        FINALDELAY 5
+        MONITOR cyberpower@localhost 1 upsmon ${upsPassword} master
+      '';
+      target = "nut/upsmon.conf";
+      mode = "0444";
+    };
   };
 
   # NFS
@@ -165,6 +267,46 @@
     enable = true;
     datasets = {
       "eru/xen-backups" = {
+        recursive = true;
+        autoprune = true;
+        autosnap = true;
+        hourly =  24;
+        daily =  7;
+        monthly = 12;
+      };
+      "eru/hansonhive" = {
+        recursive = true;
+        autoprune = true;
+        autosnap = true;
+        hourly =  24;
+        daily =  7;
+        monthly = 12;
+      };
+      "eru/tm_joe" = {
+        recursive = true;
+        autoprune = true;
+        autosnap = true;
+        hourly =  24;
+        daily =  7;
+        monthly = 12;
+      };
+      "eru/tm_elisia" = {
+        recursive = true;
+        autoprune = true;
+        autosnap = true;
+        hourly =  24;
+        daily =  7;
+        monthly = 12;
+      };
+      "eru/containers/volumes/xo-data" = {
+        recursive = true;
+        autoprune = true;
+        autosnap = true;
+        hourly =  24;
+        daily =  7;
+        monthly = 12;
+      };
+      "eru/containers/volumes/xo-redis-data" = {
         recursive = true;
         autoprune = true;
         autosnap = true;
