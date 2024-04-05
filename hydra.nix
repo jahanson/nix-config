@@ -1,6 +1,6 @@
 { inputs, outputs }:
 let
-  inherit (inputs.nixpkgs.lib) filterAttrs mapAttrs elem;
+  inherit (inputs.nixpkgs-stable.lib) filterAttrs mapAttrs elem;
 
   notBroken = pkg: !(pkg.meta.broken or false);
   isDistributable = pkg:
