@@ -75,6 +75,7 @@
     ];
   in
   {
+    hydraJobs = import ./hydra.nix { inherit inputs outputs; };
     nixosConfigurations = {
       "durincore" = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
