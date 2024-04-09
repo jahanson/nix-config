@@ -159,6 +159,9 @@
     shellcheck
     envsubst
 
+    # nix tools
+    nvd
+
   ];
   # my traceroute
   programs.mtr.enable = true;

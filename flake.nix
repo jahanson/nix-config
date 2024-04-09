@@ -69,10 +69,6 @@
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, home-manager-stable, home-manager-unstable, hy3, ... }@inputs:
   let
     inherit (self) outputs;
-    forAllSystems = nixpkgs-stable.lib.genAttrs [
-      # "aarch64-linux"
-      "x86_64-linux"
-    ];
   in
   {
     hydraJobs = import ./hydra.nix { inherit inputs outputs; };

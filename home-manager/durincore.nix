@@ -172,7 +172,11 @@
       # other
       df = "df -h";
       du = "du -h";
+
+      # nvd - nix visual diff
+      nvdiff = "nvd diff /run/current-system result";
     };
+    
     # rtx hook-env | source
     # rtx activate fish | source
     shellInit = ''
