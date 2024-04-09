@@ -174,7 +174,7 @@
       du = "du -h";
 
       # nvd - nix visual diff
-      nvdiff = "nvd diff /run/current-system result";
+      nvdiff = "nixos-rebuild build $argv && nvd diff /run/current-system result";
     };
     
     # rtx hook-env | source
