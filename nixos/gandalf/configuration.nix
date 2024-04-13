@@ -240,7 +240,7 @@ in
     containers ={
       # Xen-orchestra container
       xen-orchestra = {
-        image = "docker.io/ronivay/xen-orchestra:5.136.0";
+        image = "docker.io/ronivay/xen-orchestra:5.140.1";
         ports = [ "80:80" ];
         volumes = [ 
           "/eru/containers/volumes/xo-data:/var/lib/xo-server"
