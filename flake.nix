@@ -120,6 +120,20 @@
           }
         ];
       };
+      "telperion" = nixpkgs-stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/telperion/configuration.nix
+          ./nixos/common.nix
+          home-manager-stable.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.jahanson = import ./home-manager/telperion.nix;
+          }
+        ];
+      };
     };
   };
 }
