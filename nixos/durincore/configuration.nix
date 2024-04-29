@@ -128,4 +128,11 @@
     };
     wantedBy = [ "default.target" ];
   };
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 }
