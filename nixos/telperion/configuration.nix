@@ -10,6 +10,15 @@
       ./hardware-configuration.nix
     ];
 
+  sops = {
+    # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
+    secrets = {
+      "rndc_keys" = {
+        # owner = config.users.users
+      };
+    };
+  };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -40,6 +49,11 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
   ];
+
+  services.bind = {
+    enable = true;
+
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
