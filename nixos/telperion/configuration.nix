@@ -57,9 +57,7 @@
 
   services.bind = {
     enable = true;
-    extraConfig = ''
-      import ./config/bind.nix {inherit config;};
-    '';
+    extraConfig = import ./config/bind.nix {inherit config;};
   };
 
   # Some programs need SUID wrappers, can be configured further or are
