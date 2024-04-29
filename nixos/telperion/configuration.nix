@@ -13,11 +13,11 @@
   sops = {
     # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
     secrets = {
-      "rndc_keys_main" = {
+      "rndc_key_main" = {
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
-      "rndc_keys_externaldns" = {
+      "rndc_key_externaldns" = {
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
