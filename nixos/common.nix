@@ -12,7 +12,7 @@
 
     age = {
       # Derives sops private key from host ssh private key and places it at /var/lib/sops-nix/key.txt. 
-      sshKeyPath = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
