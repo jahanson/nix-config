@@ -30,7 +30,7 @@
 
   # Network settings
   networking = {
-    hostName = "Telperion"; # Define your hostname.
+    hostName = "telperion"; # Define your hostname.
     networkmanager.enable = true;
   };
   # Set your time zone.
