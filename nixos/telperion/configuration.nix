@@ -21,10 +21,13 @@
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
+      "bind/zones/jahanson.tech" = {
+        owner = config.users.users.named.name;
+        inherit (config.users.users.named) group;
+      };
     };
   };
 
-  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -58,7 +61,11 @@
 
   services.bind = {
     enable = true;
-
+    extraConfig = ''
+      include "${config.sops.secrets."bind/rndc-keys/main".path}";
+      include "${config.sops.secrets."bind/rndc-keys/externaldns".path}";
+      include "${config.sops.secrets."bind/named_extraconfig".path}";
+      '';
   };
 
   # Some programs need SUID wrappers, can be configured further or are
