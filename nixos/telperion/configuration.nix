@@ -11,17 +11,9 @@
     ];
 
   sops = {
-    # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
+    # Mounts unencrypted sops values at /run/secrets/bind/rndc_keys/externaldns accessible by root only by default.
     secrets = {
-      "bind/rndc_keys/main" = {
-        owner = config.users.users.named.name;
-        inherit (config.users.users.named) group;
-      };
       "bind/rndc_keys/externaldns" = {
-        owner = config.users.users.named.name;
-        inherit (config.users.users.named) group;
-      };
-      "bind/zones/jahanson.tech" = {
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
@@ -61,11 +53,7 @@
 
   services.bind = {
     enable = true;
-    extraConfig = ''
-      include "${config.sops.secrets."bind/rndc-keys/main".path}";
-      include "${config.sops.secrets."bind/rndc-keys/externaldns".path}";
-      include "${config.sops.secrets."bind/named_extraconfig".path}";
-      '';
+    extraConfig = import ./config/bind.nix {inherit config;};
   };
 
   # Some programs need SUID wrappers, can be configured further or are
