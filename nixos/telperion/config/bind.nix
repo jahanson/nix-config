@@ -20,5 +20,8 @@ zone "jahanson.tech." {
   update-policy {
     grant externaldns zonesub ANY;
   };
+  allow-query {
+    trusted;
+  };
 };
 ''
