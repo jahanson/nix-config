@@ -248,6 +248,9 @@
     # Dev
     vscode
     termius
+
+    # Nix
+    nix-inspect
   ];
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator

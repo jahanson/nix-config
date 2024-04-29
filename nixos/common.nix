@@ -182,8 +182,6 @@
 
     # nix tools
     nvd
-    nix-inspect
-
   ];
   # my traceroute
   programs.mtr.enable = true;
