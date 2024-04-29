@@ -1,0 +1,12 @@
+keys:
+  - users:
+    - &jahanson age18kj3xhlvgjeg2awwku3r8d95w360uysu0w5ejghnp4kh8qmtge5qwa2vjp
+  - hosts:
+    - &telperion age1z3vjvkead2h934n3w4m5m7tg4tj5qlzagsq6ly84h3tcu7x4ldsqd3s5fg
+
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age:
+        - *jahanson
+        - *telperion

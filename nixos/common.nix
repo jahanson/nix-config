@@ -1,7 +1,28 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
 
-  imports = [ ../cachix.nix ];
+  imports = [ 
+    ../cachix.nix
+    inputs.sops-nix.nixosModules.sops
+  ];
+
+  sops = {
+    defaultSopsFile = ../secrets.yaml;
+    validateSopsFiles = false;
+
+    age = {
+      # Derives sops private key from host ssh private key and places it at /var/lib/sops-nix/key.txt. 
+      sshKeyPath = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+
+    # # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
+    # secrets = {
+    #   rndc_keys = {};
+    # };
+  };
+
   # Bootloader.
   boot = {
     loader = {
@@ -161,6 +182,7 @@
 
     # nix tools
     nvd
+    nix-inspect
 
   ];
   # my traceroute
