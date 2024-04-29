@@ -13,15 +13,19 @@
   sops = {
     # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
     secrets = {
-      "rndc_key_main" = {
+      "bind/rndc_keys/main" = {
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
-      "rndc_key_externaldns" = {
+      "bind/rndc_keys/externaldns" = {
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
     };
+  };
+
+  environment.etc."bind/zones/jahanson.tech.zone" = {
+    
   };
 
   # Use the systemd-boot EFI boot loader.
