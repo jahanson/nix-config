@@ -14,8 +14,14 @@
     # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
     secrets = {
       "rndc_keys" = {
-        owner = config.users.users.named.name;
-        inherit (config.users.users.named) group;
+        "main" = {
+          owner = config.users.users.named.name;
+          inherit (config.users.users.named) group;
+        };
+        "externaldns" = {
+          owner = config.users.users.named.name;
+          inherit (config.users.users.named) group;
+        };
       };
     };
   };
