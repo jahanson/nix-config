@@ -32,6 +32,8 @@
 
       # nvd - nix visual diff
       nvdiff = "nixos-rebuild build && nvd diff /run/current-system result";
+
+      lazypodman="sudo DOCKER_HOST=unix:///run/podman/podman.sock lazydocker";
     };
       # rtx hook-env | source
       # rtx activate fish | source
@@ -61,7 +63,7 @@
     # with more details log output
     nix-output-monitor
     nix-inspect
-
+    lazydocker
   ];
 
   home.stateVersion = "24.05";
