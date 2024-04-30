@@ -81,7 +81,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.matchbox}/bin/matchbox -address=0.0.0.0:8080 -data-path=/srv/matchbox -log-level=debug";
+      ExecStart = "${pkgs.matchbox}/bin/matchbox -address=0.0.0.0:8080 -data-path=/srv/matchbox -asset-path=/srv/matchbox/assets -log-level=debug";
       Restart = "on-failure";
       User = "matchbox";
       Group = "matchbox";
