@@ -158,7 +158,6 @@
       image = "docker.io/1password/connect-api:1.7.2";
       autoStart = true;
       ports = [ "8080:8080" ];
-      user = "992:991";
       volumes = [
         "${config.sops.secrets."onepassword-credentials-json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
@@ -169,7 +168,6 @@
       image = "docker.io/1password/connect-sync:1.7.2";
       autoStart = true;
       ports = [ "8081:8080" ];
-      user = "992:991";
       volumes = [
         "${config.sops.secrets."onepassword-credentials-json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
