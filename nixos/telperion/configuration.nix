@@ -71,8 +71,8 @@
   users.groups.matchbox = {};
   users.users = {
     matchbox = {
+      home = "/srv/matchbox";
       group = "matchbox";
-      home = "matchbox";
       isSystemUser = true;
     };
   };
