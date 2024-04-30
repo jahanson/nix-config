@@ -55,9 +55,15 @@
     wget
   ];
 
+  # Bind DNS server for externaldns on k8s to push zone updates
   services.bind = {
     enable = true;
     extraConfig = import ./config/bind.nix {inherit config;};
+  };
+
+  # TFTP Server for pushing the files for PXE booting
+  services.tftpd = {
+    enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
