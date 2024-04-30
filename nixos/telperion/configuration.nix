@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -18,6 +18,10 @@
         inherit (config.users.users.named) group;
       };
       "bind/zones/jahanson.tech" = {
+        owner = config.users.users.named.name;
+        inherit (config.users.users.named) group;
+      };
+      "onepassword-connect-json" = {
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
@@ -83,7 +87,7 @@
       # also this double pxe-service config hack sucks, but it works.
       pxe-service=''
       tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
-      pxe-service=tag:ipxe,0,matchbox,http://10.1.1.57:8080/boot.ipxe
+      pxe-service=tag:ipxe,0,matchbox,http://10.1.1.57/boot.ipxe
       '';
       log-queries = true;
       log-dhcp = true;
@@ -104,7 +108,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.matchbox-server}/bin/matchbox -address=0.0.0.0:8080 -data-path=/srv/matchbox -assets-path=/srv/matchbox/assets -log-level=debug";
+      ExecStart = "${pkgs.matchbox-server}/bin/matchbox -address=0.0.0.0:80 -data-path=/srv/matchbox -assets-path=/srv/matchbox/assets -log-level=debug";
       Restart = "on-failure";
       User = "matchbox";
       Group = "matchbox";
@@ -126,6 +130,54 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
+  };
+
+  # 1Password Connect API and Sync services
+  users.users = {
+    onepassword-connect = {
+      home = "/var/lib/onepassword-connect";
+      isSystemUser = true;
+    };
+  };
+
+  system.activationScripts.makeOnePasswordConnectDataDir = lib.stringAfter [ "var"] ''
+    mkdir -p /var/lib/onepassword-connect
+    chown onepassword:root /var/lib/onepassword-connect
+    '';
+
+  virtualisation.podman = {
+    enable = true;
+
+    # `docker` alias for podman
+    dockerCompat = true;
+
+    # Required for podman-compose so pods can talk to each other.
+    defaultNetwork.settings.dns_enabled = true;
+
+  };
+
+  virtualisation.oci-containers.containers = {
+    onepassword-connect-api = {
+      image = "docker.io/1password/connect-api:1.7.2";
+      autoStart = true;
+      ports = [ "8080:8080" ];
+      user = "onepassword:root";
+      volumes = [
+        "${config.sops.secrets."onepassword-connect-json".path}:/home/opuser/.op/1password-credentials.json"
+        "/var/lib/onepassword-connect:/home/opuser/.op/data"
+      ];
+    };
+
+    onepassword-connect-sync = {
+      image = "docker.io/1password/connect-sync:1.7.2";
+      autoStart = true;
+      ports = [ "8081:8080" ];
+      user = "onepassword:root";
+      volumes = [
+        "${config.sops.secrets."onepassword-connect-json".path}:/home/opuser/.op/1password-credentials.json"
+        "/var/lib/onepassword-connect:/home/opuser/.op/data"
+      ];
+    };
   };
 
   # Open ports in the firewall.
