@@ -68,10 +68,12 @@
   };
 
   # Matchbox Server for PXE booting via device profiles
+  users.groups.matchbox = {};
   users.users = {
     matchbox = {
       group = "matchbox";
       home = "matchbox";
+      isSystemUser = true;
     };
   };
 
