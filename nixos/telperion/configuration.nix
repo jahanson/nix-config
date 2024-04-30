@@ -142,11 +142,6 @@
     };
   };
 
-  system.activationScripts.makeOnePasswordConnectDataDir = lib.stringAfter [ "var"] ''
-    mkdir -p /var/lib/onepassword-connect
-    chown onepassword:root /var/lib/onepassword-connect
-    '';
-
   virtualisation.podman = {
     enable = true;
 
