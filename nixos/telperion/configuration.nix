@@ -62,9 +62,25 @@
     extraConfig = import ./config/bind.nix {inherit config;};
   };
 
-  # TFTP Server for pushing the files for PXE booting
-  services.tftpd = {
+  services.dnsmasq = {
     enable = true;
+    resolveLocalQueries = false;
+    settings = {
+      dhcp-range = [ "10.1.1.1,proxy,255.255.255.0" ];
+      enable-tftp = true;
+      tftp-root="/srv/tftp";
+      # if request comes from older PXE ROM, chainload to iPXE (via TFTP)
+      pxe-service=''
+      tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe"
+      tag:ipxe,0,matchbox,http://10.1.1.57:8080/boot.ipxe
+      '';
+      # if request comes from iPXE user class, set tag "ipxe"
+      dhcp-userclass="set:ipxe,iPXE";
+      # point ipxe tagged requests to the matchbox iPXE boot script (via HTTP)
+      # pxe-service="tag:ipxe,0,matchbox,http://10.1.1.57:8080/boot.ipxe";
+      log-queries = true;
+      log-dhcp = true;
+    };
   };
 
   # Matchbox Server for PXE booting via device profiles
