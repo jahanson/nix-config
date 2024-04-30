@@ -87,7 +87,7 @@
       # also this double pxe-service config hack sucks, but it works.
       pxe-service=''
       tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
-      pxe-service=tag:ipxe,0,matchbox,http://10.1.1.57/boot.ipxe
+      pxe-service=tag:ipxe,0,matchbox,http://10.1.1.57:8086/boot.ipxe
       '';
       log-queries = true;
       log-dhcp = true;
@@ -108,7 +108,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.matchbox-server}/bin/matchbox -address=0.0.0.0:80 -data-path=/srv/matchbox -assets-path=/srv/matchbox/assets -log-level=debug";
+      ExecStart = "${pkgs.matchbox-server}/bin/matchbox -address=0.0.0.0:8086 -data-path=/srv/matchbox -assets-path=/srv/matchbox/assets -log-level=debug";
       Restart = "on-failure";
       User = "matchbox";
       Group = "matchbox";
