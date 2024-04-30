@@ -70,9 +70,10 @@
       enable-tftp = true;
       tftp-root="/srv/tftp";
       # if request comes from older PXE ROM, chainload to iPXE (via TFTP)
+      # also this hack sucks, but it works
       pxe-service=''
       tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe"
-      tag:ipxe,0,matchbox,http://10.1.1.57:8080/boot.ipxe
+      pxe-service=tag:ipxe,0,matchbox,http://10.1.1.57:8080/boot.ipxe
       '';
       # if request comes from iPXE user class, set tag "ipxe"
       dhcp-userclass="set:ipxe,iPXE";
