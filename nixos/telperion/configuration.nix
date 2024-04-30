@@ -22,8 +22,8 @@
         inherit (config.users.users.named) group;
       };
       "onepassword-connect-json" = {
-        owner = config.users.users.named.name;
-        inherit (config.users.users.named) group;
+        owner = config.users.users.onepassword-connect.name;
+        inherit (config.users.users.onepassword-connect.name) group;
       };
     };
   };
@@ -133,9 +133,11 @@
   };
 
   # 1Password Connect API and Sync services
+  users.groups.onepassword-connect = {};
   users.users = {
     onepassword-connect = {
       home = "/var/lib/onepassword-connect";
+      group = "onepassword-connect";
       isSystemUser = true;
     };
   };
@@ -161,7 +163,7 @@
       image = "docker.io/1password/connect-api:1.7.2";
       autoStart = true;
       ports = [ "8080:8080" ];
-      user = "onepassword:root";
+      user = "onepassword:onepassword-connect";
       volumes = [
         "${config.sops.secrets."onepassword-connect-json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
@@ -172,7 +174,7 @@
       image = "docker.io/1password/connect-sync:1.7.2";
       autoStart = true;
       ports = [ "8081:8080" ];
-      user = "onepassword:root";
+      user = "onepassword:onepassword-connect";
       volumes = [
         "${config.sops.secrets."onepassword-connect-json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
