@@ -53,6 +53,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    matchbox-server
   ];
 
   # Bind DNS server for externaldns on k8s to push zone updates
@@ -64,6 +65,25 @@
   # TFTP Server for pushing the files for PXE booting
   services.tftpd = {
     enable = true;
+  };
+
+  # Matchbox Server for PXE booting via device profiles
+  users.users = {
+    matchbox = {
+      group = "matchbox";
+      home = "matchbox";
+    };
+  };
+
+  systemd.services.matchbox = {
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.matchbox}/bin/matchbox -address=0.0.0.0:8080 -data-path=/srv/matchbox/data -log-level=debug";
+      Restart = "on-failure";
+      User = "matchbox";
+      Group = "matchbox";
+    };
   };
 
   # Some programs need SUID wrappers, can be configured further or are
