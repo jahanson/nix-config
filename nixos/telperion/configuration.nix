@@ -23,7 +23,7 @@
       };
       "onepassword-connect-json" = {
         owner = config.users.users.onepassword-connect.name;
-        inherit (config.users.users.onepassword-connect.name) group;
+        inherit (config.users.users.onepassword-connect) group;
       };
     };
   };
