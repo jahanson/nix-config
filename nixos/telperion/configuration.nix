@@ -21,7 +21,7 @@
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
-      "onepassword-connect-json" = {
+      "onepassword-credentials-json" = {
         owner = config.users.users.onepassword-connect.name;
         inherit (config.users.users.onepassword-connect) group;
       };
@@ -165,7 +165,7 @@
       ports = [ "8080:8080" ];
       user = "onepassword:onepassword-connect";
       volumes = [
-        "${config.sops.secrets."onepassword-connect-json".path}:/home/opuser/.op/1password-credentials.json"
+        "${config.sops.secrets."onepassword-credentials-json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
       ];
     };
@@ -176,7 +176,7 @@
       ports = [ "8081:8080" ];
       user = "onepassword:onepassword-connect";
       volumes = [
-        "${config.sops.secrets."onepassword-connect-json".path}:/home/opuser/.op/1password-credentials.json"
+        "${config.sops.secrets."onepassword-credentials-json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
       ];
     };
