@@ -22,8 +22,8 @@
         inherit (config.users.users.named) group;
       };
       "onepassword-credentials-json" = {
-        owner = 999;
-        group = 999;
+        owner = "999";
+        group = "999";
       };
     };
   };
