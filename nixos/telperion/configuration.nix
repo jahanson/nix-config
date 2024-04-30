@@ -21,9 +21,8 @@
         owner = config.users.users.named.name;
         inherit (config.users.users.named) group;
       };
-      "onepassword-credentials-json" = {
-        owner = "nm-iodine";
-        group = "nscd";
+      "1password-credentials.json" = {
+        mode = "0444";
       };
     };
   };
@@ -150,7 +149,7 @@
       autoStart = true;
       ports = [ "8080:8080" ];
       volumes = [
-        "${config.sops.secrets."onepassword-credentials-json".path}:/home/opuser/.op/1password-credentials.json"
+        "${config.sops.secrets."1password-credentials.json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
       ];
     };
@@ -160,7 +159,7 @@
       autoStart = true;
       ports = [ "8081:8080" ];
       volumes = [
-        "${config.sops.secrets."onepassword-credentials-json".path}:/home/opuser/.op/1password-credentials.json"
+        "${config.sops.secrets."1password-credentials.json".path}:/home/opuser/.op/1password-credentials.json"
         "/var/lib/onepassword-connect:/home/opuser/.op/data"
       ];
     };
