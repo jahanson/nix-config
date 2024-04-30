@@ -66,6 +66,7 @@
     enable = true;
     resolveLocalQueries = false;
     settings = {
+      port=0;
       dhcp-range = [ "10.1.1.1,proxy,255.255.255.0" ];
       enable-tftp = true;
       tftp-root="/srv/tftp";
