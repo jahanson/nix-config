@@ -22,8 +22,8 @@
         inherit (config.users.users.named) group;
       };
       "onepassword-credentials-json" = {
-        owner = config.users.users.onepassword-connect.name;
-        inherit (config.users.users.onepassword-connect) group;
+        owner = 999;
+        group = 999;
       };
     };
   };
@@ -133,15 +133,6 @@
   };
 
   # 1Password Connect API and Sync services
-  users.groups.onepassword-connect = {};
-  users.users = {
-    onepassword-connect = {
-      home = "/var/lib/onepassword-connect";
-      group = "onepassword-connect";
-      isSystemUser = true;
-    };
-  };
-
   virtualisation.podman = {
     enable = true;
 
