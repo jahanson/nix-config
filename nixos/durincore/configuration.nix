@@ -58,6 +58,7 @@
       };
     };
   };
+  services.cachix-agent.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
