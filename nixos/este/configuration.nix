@@ -25,6 +25,7 @@
 
   # List services that you want to enable:
 
+  services.cachix-agent.enable = true;
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
