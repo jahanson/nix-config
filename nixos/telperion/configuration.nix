@@ -128,7 +128,6 @@
         option httplog
         option dontlognull
         option http-server-close
-        option forwardfor except 127.0.0.0/8
         option redispatch
         retries 3
         timeout http-request 10s
