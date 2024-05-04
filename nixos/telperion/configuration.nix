@@ -83,11 +83,10 @@
       # ALSO 
       # point ipxe tagged requests to the matchbox iPXE boot script (via HTTP)
       # pxe-service="tag:ipxe,0,matchbox,http://10.1.1.57:8080/boot.ipxe";
-      # also this double pxe-service config hack sucks, but it works.
-      pxe-service=''
-      tag:#ipxe,x86PC,"PXE chainload to iPXE",undionly.kpxe
-      pxe-service=tag:ipxe,0,matchbox,http://10.1.1.57:8086/boot.ipxe
-      '';
+      pxe-service = [
+        "tag:#ipxe,x86PC,\"PXE chainload to iPXE\",undionly.kpxe"
+        "tag:ipxe,0,matchbox,http://10.1.1.57:8086/boot.ipxe"
+      ];
       log-queries = true;
       log-dhcp = true;
     };
