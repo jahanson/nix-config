@@ -237,28 +237,51 @@ in
   # Podman Containers
   virtualisation.oci-containers = {
     backend = "podman";
-    containers ={
-      # Xen-orchestra container
-      xen-orchestra = {
-        image = "docker.io/ronivay/xen-orchestra:5.140.1";
-        ports = [ "80:80" ];
+    containers = {
+      # Unifi Controller
+      unifi = {
+        image = "ghcr.io/goofball222/unifi:8.1.113";
+        ports = [
+        "3478:3478/udp"  # STUN
+        "8080:8080"      # inform controller
+        "8443:8443"      # https
+        "8880:8880"      # HTTP portal redirect
+        "8843:8843"      # HTTPS portal redirect
+        ];
+        autoStart = true;
         volumes = [ 
-          "/eru/containers/volumes/xo-data:/var/lib/xo-server"
-          "/eru/containers/volumes/xo-redis-data:/var/lib/redis"
-          "/eru/xen-backups:/backups"
+          "/eru/containers/volumes/unifi/cert:/usr/lib/unifi/cert"
+          "/eru/containers/volumes/unifi/data:/usr/lib/unifi/data"
+          "/eru/containers/volumes/logs:/usr/lib/unifi/logs"
         ];
         environment = {
-          HTTP_PORT = "80";
+          TZ = "America/Chicago";
+          RUNAS_UID0 = "false";
+          PGID = "102";
+          PUID = "999";
         };
-        extraOptions = [
-          "--device=/dev/fuse:/dev/fuse"
-          "--device=/dev/loop-control:/dev/loop-control"
-          "--device=/dev/loop0:/dev/loop0"
-          "--device=/dev/loop0:/dev/loop1"
-          "--device=/dev/loop0:/dev/loop2"
-          "--device=/dev/loop0:/dev/loop3"
-        ];
       };
+      # # Xen-orchestra container
+      # xen-orchestra = {
+      #   image = "docker.io/ronivay/xen-orchestra:5.140.1";
+      #   ports = [ "80:80" ];
+      #   volumes = [ 
+      #     "/eru/containers/volumes/xo-data:/var/lib/xo-server"
+      #     "/eru/containers/volumes/xo-redis-data:/var/lib/redis"
+      #     "/eru/xen-backups:/backups"
+      #   ];
+      #   environment = {
+      #     HTTP_PORT = "80";
+      #   };
+      #   extraOptions = [
+      #     "--device=/dev/fuse:/dev/fuse"
+      #     "--device=/dev/loop-control:/dev/loop-control"
+      #     "--device=/dev/loop0:/dev/loop0"
+      #     "--device=/dev/loop0:/dev/loop1"
+      #     "--device=/dev/loop0:/dev/loop2"
+      #     "--device=/dev/loop0:/dev/loop3"
+      #   ];
+      # };
     };
   };
   
