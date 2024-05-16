@@ -252,7 +252,7 @@ in
         volumes = [ 
           "/eru/containers/volumes/unifi/cert:/usr/lib/unifi/cert"
           "/eru/containers/volumes/unifi/data:/usr/lib/unifi/data"
-          "/eru/containers/volumes/logs:/usr/lib/unifi/logs"
+          "/eru/containers/volumes/unifi/logs:/usr/lib/unifi/logs"
         ];
         environment = {
           TZ = "America/Chicago";
