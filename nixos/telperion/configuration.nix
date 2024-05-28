@@ -197,7 +197,7 @@
     dockerCompat = true;
 
     # Required for podman-compose so pods can talk to each other.
-    defaultNetwork.settings.dns_enabled = true;
+    defaultNetwork.settings.dns_enabled = false;
 
   };
 
