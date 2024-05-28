@@ -67,7 +67,7 @@
   users.users.jahanson = {
     isNormalUser = true;
     description = "Joseph Hanson";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "kah" ];
     shell = pkgs.fish;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsUe5YF5z8vGcEYtQX7AAiw2rJygGf2l7xxr8nZZa7w"
@@ -78,6 +78,13 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIATyScd8ZRhV7uZmrQNSAbRTs9N/Dbx+Y8tGEDny30sA jahanson@Anduril"
     ];
   }; 
+
+  # extra user for containers
+  users.users.kah = {
+    uid = 568;
+    group = "kah";
+  };
+  users.groups.kah = {};
 
   # Default editor
   environment.variables.EDITOR = "vim";

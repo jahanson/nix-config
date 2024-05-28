@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
 let
   upsPassword = "illgettoiteventually";
   vendorid = "0764";
@@ -15,6 +15,15 @@ in
       ./hardware-configuration.nix
       inputs.nixvirt-git.nixosModules.default
     ];
+  sops = {
+    # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
+    secrets = {
+      "lego/dnsimple/token" = {
+        owner = config.users.users.kah;
+        inherit (config.users.users.kah) group;
+      };
+    };
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -260,15 +269,22 @@ in
           PGID = "102";
           PUID = "999";
         };
+      };
       lego-auto = {
         image = "ghcr.io/bjw-s/lego-auto:v0.3.0";
         autoStart = true;
         volumes = [ 
           "/eru/containers/volumes/unifi/cert:/certs"
         ];
+        user = "102:999";
         environment = {
           TZ = "America/Chicago";
-          EMAIL = "";
+          LA_DATADIR="/certs";
+          LA_CACHEDIR="/certs/.cache";
+          LA_EMAIL = "joe@veri.dev";
+          LA_DOMAINS = "gandalf.jahanson.tech";
+          LA_PROVIDER = "dnsimple";
+          DNSIMPLE_OAUTH_TOKEN_FILE = "${config.sops.secrets."lego/dnsimple/token".path}";
         };
       };
       # # Xen-orchestra container
@@ -294,7 +310,6 @@ in
       # };
     };
   };
-};
   
   # ZFS automated snapshots
   services.sanoid = {
