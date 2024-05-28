@@ -3,3 +3,4 @@
 result
 result-*
 .decrypted~secrets.yaml
+age.key

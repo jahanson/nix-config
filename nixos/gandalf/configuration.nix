@@ -260,6 +260,16 @@ in
           PGID = "102";
           PUID = "999";
         };
+      lego-auto = {
+        image = "ghcr.io/bjw-s/lego-auto:v0.3.0";
+        autoStart = true;
+        volumes = [ 
+          "/eru/containers/volumes/unifi/cert:/certs"
+        ];
+        environment = {
+          TZ = "America/Chicago";
+          EMAIL = "";
+        };
       };
       # # Xen-orchestra container
       # xen-orchestra = {
@@ -284,6 +294,7 @@ in
       # };
     };
   };
+};
   
   # ZFS automated snapshots
   services.sanoid = {
