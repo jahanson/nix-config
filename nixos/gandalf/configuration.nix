@@ -272,7 +272,9 @@ in
       lego-auto = {
         image = "ghcr.io/bjw-s/lego-auto:v0.3.0";
         autoStart = true;
-        dns = ["1.1.1.1"];
+        extraOptions = [
+          "--dns=1.1.1.1"
+        ];
         volumes = [ 
           "/eru/containers/volumes/unifi/cert:/certs"
           "${config.sops.secrets."lego/dnsimple/token".path}:/config/dnsimple-token"
