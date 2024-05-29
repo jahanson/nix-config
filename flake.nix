@@ -72,39 +72,6 @@
   in
   {
     nixosConfigurations = {
-      "durincore" = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # Import the configuration.nix here, so that the
-          # old configuration file can still take effect.
-          # Note: configuration.nix itself is also a Nixpkgs Module,
-          ./nixos/durincore/configuration.nix
-          ./nixos/common.nix
-          # { nixpkgs.overlays = [ (self: super: { atuin = atuin.packages.${self.pkgs.system}.atuin; }) ]; }
-          home-manager-unstable.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.jahanson = import ./home-manager/durincore.nix;
-            home-manager.extraSpecialArgs = {inherit inputs outputs;};
-          }
-        ];
-      };
-      "este" = nixpkgs-stable.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/este/configuration.nix
-          ./nixos/common.nix
-          home-manager-stable.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.jahanson = import ./home-manager/este.nix;
-          }
-        ];
-      };
       "gandalf" = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs outputs;};
