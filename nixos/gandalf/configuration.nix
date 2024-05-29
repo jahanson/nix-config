@@ -19,8 +19,7 @@ in
     # Mounts unencrypted sops values at /run/secrets/rndc_keys accessible by root only by default.
     secrets = {
       "lego/dnsimple/token" = {
-        owner = config.users.users.kah.name;
-        inherit (config.users.users.kah) group;
+        mode = "0444";
       };
     };
   };
