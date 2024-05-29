@@ -274,6 +274,7 @@ in
         autoStart = true;
         volumes = [ 
           "/eru/containers/volumes/unifi/cert:/certs"
+          "${config.sops.secrets."lego/dnsimple/token".path}:/config/dnsimple-token"
         ];
         user = "999:102";
         environment = {
@@ -283,7 +284,7 @@ in
           LA_EMAIL = "joe@veri.dev";
           LA_DOMAINS = "gandalf.jahanson.tech";
           LA_PROVIDER = "dnsimple";
-          DNSIMPLE_OAUTH_TOKEN_FILE = "${config.sops.secrets."lego/dnsimple/token".path}";
+          DNSIMPLE_OAUTH_TOKEN_FILE = "/config/dnsimple-token";
         };
       };
       # # Xen-orchestra container
