@@ -2,6 +2,7 @@
   "nodes": {
     "atuin": {
       "inputs": {
+        "fenix": "fenix",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "nixpkgs": [
@@ -9,16 +10,38 @@
         ]
       },
       "locked": {
-        "lastModified": 1718207138,
-        "narHash": "sha256-Fauqxm5KDfUWZZ3xFUXww+yRFODYGtbVSIXxRjFBOvs=",
+        "lastModified": 1718297304,
+        "narHash": "sha256-43akfzi8N3ys1WJ5rZCdKey9jMNahtuhW1/xq0K9DYw=",
         "owner": "atuinsh",
         "repo": "atuin",
-        "rev": "9fa223eaaf0eda4e5f76621dc6d457417afb8b54",
+        "rev": "efcb5dbd97d455a9a2448747bb2e93c77a52a9b7",
         "type": "github"
       },
       "original": {
         "owner": "atuinsh",
         "repo": "atuin",
+        "type": "github"
+      }
+    },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "atuin",
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1717827974,
+        "narHash": "sha256-ixopuTeTouxqTxfMuzs6IaRttbT8JqRW5C9Q/57WxQw=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "ab655c627777ab5f9964652fe23bbb1dfbd687a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
         "type": "github"
       }
     },
@@ -283,11 +306,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1718139439,
-        "narHash": "sha256-y8IkZBLDkBTSvGKeBT8cC41gG4W1xkDHPD5zdW/M6Uk=",
+        "lastModified": 1718272114,
+        "narHash": "sha256-KsX7sAwkEFpXiwyjt0HGTnnrUU58wW1jlzj5IA/LRz8=",
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-        "rev": "8f1ee9f964ef8820f44b6d13e49e187f10043050",
+        "rev": "24be4a26f0706e456fca1b61b8c79f7486a9e86d",
         "type": "github"
       },
       "original": {
@@ -566,6 +589,23 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvirt-git": "nixvirt-git",
         "sops-nix": "sops-nix"
+      }
+    },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717583671,
+        "narHash": "sha256-+lRAmz92CNUxorqWusgJbL9VE1eKCnQQojglRemzwkw=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "48bbdd6a74f3176987d5c809894ac33957000d19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
       }
     },
     "sops-nix": {
