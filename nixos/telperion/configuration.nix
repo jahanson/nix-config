@@ -114,7 +114,7 @@
   };
 
   # haproxy for load balancing talos and kubernetes api.
-    services.haproxy = {
+  services.haproxy = {
     enable = true;
     config = ''
       global

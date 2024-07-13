@@ -163,7 +163,12 @@ in
   };
 
   # NFS
-  services.nfs.server.enable = true;
+  services.nfs.server = {
+    enable = true;
+    statdPort = 4000;
+    lockdPort = 4001;
+    mountdPort = 4002;
+  };
 
   # SMB
   services.samba-wsdd = {
